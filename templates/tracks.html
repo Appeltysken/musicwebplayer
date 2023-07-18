@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Список композиций</title>
-</head>
-<body>
-    <h1>Список композиций</h1>
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <h1> Список композиций</h1>
     <ul>
         {% for track in tracks %}
-        <li>
+        <li class="track">
             <strong>Track:</strong> {{ track.name }}<br>
             <strong>Artist:</strong> {{ track.artist_name }}<br>
             <audio controls>
-              <source src="{{ track.audio }}" type="{{ track.audio_type }}">
-              Your browser does not support the audio element.
+                <source src="{{ track.audio }}" type="{{ track.audio_type }}">
+                Что-то пошло не так...
             </audio>
         </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
