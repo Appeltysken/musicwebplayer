@@ -1,19 +1,42 @@
 {% extends 'layout.html' %}
 
-{% block title %}{% endblock %}
+{% block title %}Список композиций{% endblock %}
 
 {% block content %}
-    <h1> Список композиций</h1>
-    <ul>
+    <h1 class="tracks-header">Список композиций</h1>
+    <ul class="favorite-tracks">
         {% for track in tracks %}
-        <li class="track">
-            <strong>Track:</strong> {{ track.name }}<br>
-            <strong>Artist:</strong> {{ track.artist_name }}<br>
-            <audio controls>
-                <source src="{{ track.audio }}" type="{{ track.audio_type }}">
-                Что-то пошло не так...
-            </audio>
+        <li class="track-item">
+            <div class="track-info">
+                <div class="track-title">
+                    <strong>Track:</strong> {{ track.name }}<br>
+                </div>
+                <div class="track-artist">
+                    <strong>Artist:</strong> <span class="artist-name">{{ track.artist_name }}</span><br>
+                </div>
+            </div>
+            <div class="track-actions">
+                <div class="track-player">
+                    <audio controls>
+                        <source src="{{ track.audio }}" type="{{ track.audio_type }}">
+                        Что-то пошло не так...
+                    </audio>
+                </div>
+                <div class="favorite-btn-container">
+                    <button class="favorite-btn {% if track.id in session.get('favorite_tags', []) %}favorite{% endif %}" data-track-id="{{ track.id }}">
+                        {% if track.id in session.get('favorite_tags', []) %}
+                            <i class="fas fa-star"></i>
+                        {% else %}
+                            <i class="far fa-star"></i>
+                        {% endif %}
+                    </button>
+                    <span class="message"></span>
+                </div>
+            </div>
         </li>
         {% endfor %}
     </ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}

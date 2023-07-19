@@ -251,14 +251,12 @@ body.loggedin {
 }
 
 
-/* Прогресс-бар */
 .track audio::-webkit-progress-value,
 .track audio::-moz-progress-bar,
 .track audio::-ms-fill {
     background-color: #00aaff;
 }
 
-/* Кнопки воспроизведения и паузы */
 .track audio::-webkit-media-controls-play-button::before,
 .track audio::-webkit-media-controls-pause-button::before,
 .track audio::-moz-media-controls-play-button::before,
@@ -266,8 +264,100 @@ body.loggedin {
     color: #ffffff;
 }
 
-/* Оставшееся время */
 .track audio::-webkit-media-controls-time-remaining-display,
 .track audio::-moz-media-controls-time-remaining-display {
     color: #00aaff;
+}
+
+.favorite-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #518ac7;
+    transition: color 0.3s ease-in-out;
+}
+  
+.favorite-btn:hover {
+    color: #2381e7;
+}
+  
+.favorite-btn.active {
+    color: #2381e7;
+}
+  
+.favorite-btn i {
+    font-size: 1.2rem;
+}
+
+.message {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.message.show {
+    opacity: 1;
+}
+.favorite-tracks {
+    list-style: none;
+    padding: 0;
+}
+
+.track-item {
+    margin-bottom: 20px;
+}
+
+.track-info {
+    margin-left: 20px;
+}
+
+.track-title, .track-artist {
+    color: #333;
+}
+
+.track-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.track-player {
+    margin-top: 10px;
+}
+
+.favorite-header {
+    margin-left: 20px;
+    font-size: 24px;
+    color: #3274D6;
+}
+.tracks-header {
+    margin-left: 20px; 
+    font-size: 24px; 
+    color: #3274D6;
+}
+
+.track-info {
+    margin-left: 20px;
+}
+
+.track-info strong {
+    color: #333;
+}
+
+.track-info span {
+    color: #333;
+}
+
+.favorite-btn-container {
+    display: flex;
+    align-items: center;
+}
+
+.favorite-btn {
+    margin-left: 10px;
+}
+
+.track-actions {
+    display: flex;
+    align-items: center;
 }
