@@ -1,42 +1,23 @@
-{% extends 'layout.html' %}
-
-{% block title %}Список композиций{% endblock %}
-
-{% block content %}
-    <h1 class="tracks-header">Список композиций</h1>
-    <ul class="favorite-tracks">
-        {% for track in tracks %}
-        <li class="track-item">
-            <div class="track-info">
-                <div class="track-title">
-                    <strong>Track:</strong> {{ track.name }}<br>
-                </div>
-                <div class="track-artist">
-                    <strong>Artist:</strong> <span class="artist-name">{{ track.artist_name }}</span><br>
-                </div>
-            </div>
-            <div class="track-actions">
-                <div class="track-player">
-                    <audio controls>
-                        <source src="{{ track.audio }}" type="{{ track.audio_type }}">
-                        Что-то пошло не так...
-                    </audio>
-                </div>
-                <div class="favorite-btn-container">
-                    <button class="favorite-btn {% if track.id in session.get('favorite_tags', []) %}favorite{% endif %}" data-track-id="{{ track.id }}">
-                        {% if track.id in session.get('favorite_tags', []) %}
-                            <i class="fas fa-star"></i>
-                        {% else %}
-                            <i class="far fa-star"></i>
-                        {% endif %}
-                    </button>
-                    <span class="message"></span>
-                </div>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-{% endblock %}
+{% extends 'layout.html' %} {% block title %} Поиск треков {% endblock %} {% block content %}
+<h1 class="tracks-header">Поиск треков</h1>
+<div id="track-search-container">
+	<input type="text" id="search-input" />
+	<button id="search-button">Поиск</button>
+	<ul id="search-results"></ul>
+</div>
+<!-- Музыкальный плеер -->
+<div class="player">
+	<div class="track-info">
+		<div class="track-name" id="track-name"></div>
+		<div class="artist-name" id="artist-name"></div>
+	</div>
+	<div class="player-controls">
+		<button id="prev-button"><i class="fas fa-backward"></i></button>
+		<button id="play-button"><i class="fas fa-play"></i> / <i class="fas fa-pause"></i></button>
+		<button id="next-button"><i class="fas fa-forward"></i></button>
+		<input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" /> </div>
+	<audio id="audio-player" controls style="display: none;"></audio>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ url_for('static', filename='search.js') }}"></script> {% endblock %}
