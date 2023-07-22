@@ -11,22 +11,20 @@ load_dotenv()
 
 app = Flask(__name__)
 
-app.secret_key = os.getenv("APP_SECRET_KEY")  # your secret key
+app.secret_key = os.getenv("APP_SECRET_KEY")  # Секретный ключ (любой)
 app.config["MYSQL_HOST"] = os.getenv("MYSQL_HOST")  # local host
 app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")  # root
 app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
-app.config["MYSQL_DB"] = os.getenv("MYSQL_DB")  # name of db
+app.config["MYSQL_DB"] = os.getenv("MYSQL_DB")  # Название базы данных MySQL
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-VKID = os.getenv(
-    "VKID"
-)  # ID приложения на vk.com/editapp?id=АйдиПриложения&section=options
+VKID = os.getenv("VKID") # ID приложения
 
 REDIRECTURI = "http://127.0.0.1:5000/login_vk"  # Редирект посетителя после авторизации
 VKSECRET = os.getenv("VK_SECRET")
 API_KEY = os.getenv("API_KEY")  # API Jamendo
 
-app.jinja_env.globals.update(VKID=VKID)  # айди приложения
-app.jinja_env.globals.update(REDIRECTURI=REDIRECTURI)  # редирект
+app.jinja_env.globals.update(VKID=VKID)  # ID приложения
+app.jinja_env.globals.update(REDIRECTURI=REDIRECTURI)  # Редирект
 
 mysql = MySQL(app)
 
