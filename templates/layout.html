@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>{% block title %}{% endblock %}</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-	</head>
-	<body class="loggedin">
-		<nav class="navtop">
-			<div>
-				<h1>SongShack</h1>
-                <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Домашняя страница</a>
-				<a href="{{ url_for('get_tracks') }}"><i class="fas fa-music"></i>Музыка</a>
-				<a href="{{ url_for('favorite_tracks') }}"><i class="fas fa-star"></i>Избранное</a>
-				<a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>Профиль</a>
-				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Выйти</a>
-			</div>
-		</nav>
-		<div class="content">
-			{% block content %}{% endblock %}
-		</div>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"> </head>
+
+<body class="loggedin">
+	<nav class="navtop">
+		<div>
+			<h1>SongShack</h1> <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Домашняя страница</a> <a href="{{ url_for('get_tracks') }}"><i class="fas fa-music"></i>Музыка</a> <a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>Профиль</a> <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Выйти</a> </div>
+	</nav>
+	<div class="content"> {% block content %}{% endblock %} </div>
+</body>
+
 </html>

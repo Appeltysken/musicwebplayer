@@ -1,363 +1,469 @@
 * {
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    background-color: #F1F7FA;
-    margin: 0;
+	background-color: #F1F7FA;
+	margin: 0;
 }
 
 .login, .register {
-    width: 400px;
-    background-color: #ffffff;
-    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
-    margin: 100px auto;
+	width: 400px;
+	background-color: #ffffff;
+	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+	margin: 100px auto;
 }
 
 .login h1, .register h1 {
-    text-align: center;
-    color: #3274D6;
-    font-size: 24px;
-    padding: 20px 0;
-    border-bottom: 1px solid #dee0e4;
+	text-align: center;
+	color: #3274D6;
+	font-size: 24px;
+	padding: 20px 0;
+	border-bottom: 1px solid #dee0e4;
 }
 
 .login .links, .register .links {
-    display: flex;
-    justify-content: center;
-    padding: 0 15px;
+	display: flex;
+	justify-content: center;
+	padding: 0 15px;
 }
 
 .login .links a, .register .links a {
-    color: #ADB2BA;
-    text-decoration: none;
-    display: inline-flex;
-    padding: 0 10px 10px;
-    font-weight: bold;
+	color: #ADB2BA;
+	text-decoration: none;
+	display: inline-flex;
+	padding: 0 10px 10px;
+	font-weight: bold;
 }
 
 .login .links a:hover, .register .links a:hover {
-    color: #9DA3AC;
+	color: #9DA3AC;
 }
 
 .login .links a.active, .register .links a.active {
-    border-bottom: 3px solid #3274D6;
-    color: #3274D6;
+	border-bottom: 3px solid #3274D6;
+	color: #3274D6;
 }
 
 .login form, .register form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding-top: 20px;
 }
 
 .login form label, .register form label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    background-color: #3274D6;
-    color: #ffffff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	background-color: #3274D6;
+	color: #ffffff;
 }
 
 .login form input[type="password"], .login form input[type="text"], .login form input[type="email"], .register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
-    width: 310px;
-    height: 50px;
-    border: 1px solid #dee0e4;
-    margin-bottom: 20px;
-    padding: 0 15px;
+	width: 310px;
+	height: 50px;
+	border: 1px solid #dee0e4;
+	margin-bottom: 20px;
+	padding: 0 15px;
 }
 
 .login form input[type="submit"], .register form input[type="submit"] {
-    width: 100%;
-    padding: 15px;
-    margin-top: 20px;
-    background-color: #3274D6;
-    border: 0;
-    cursor: pointer;
-    font-weight: bold;
-    color: #ffffff;
-    transition: background-color 0.2s;
+	width: 100%;
+	padding: 15px;
+	margin-top: 20px;
+	background-color: #3274D6;
+	border: 0;
+	cursor: pointer;
+	font-weight: bold;
+	color: #ffffff;
+	transition: background-color 0.2s;
 }
 
 .login form input[type="submit"]:hover, .register form input[type="submit"]:hover {
-    background-color: #2868C7;
-    transition: background-color 0.2s;
+	background-color: #2868C7;
+	transition: background-color 0.2s;
 }
 
 .navtop {
-    background-color: #3274D6;
-    height: 60px;
-    width: 100%;
-    border: 0;
+	background-color: #3274D6;
+	height: 60px;
+	width: 100%;
+	border: 0;
 }
 
 .navtop div {
-    display: flex;
-    margin: 0 auto;
-    width: 1000px;
-    height: 100%;
+	display: flex;
+	margin: 0 auto;
+	width: 1000px;
+	height: 100%;
 }
 
 .navtop div h1, .navtop div a {
-    display: inline-flex;
-    align-items: center;
+	display: inline-flex;
+	align-items: center;
 }
 
 .navtop div h1 {
-    flex: 1;
-    font-size: 24px;
-    padding: 0;
-    margin: 0;
-    color: #ffffff;
-    font-weight: normal;
+	flex: 1;
+	font-size: 24px;
+	padding: 0;
+	margin: 0;
+	color: #ffffff;
+	font-weight: normal;
 }
 
 .navtop div a {
-    padding: 0 20px;
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: bold;
+	padding: 0 20px;
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: bold;
 }
 
 .navtop div a i {
-    padding: 2px 8px 0 0;
+	padding: 2px 8px 0 0;
 }
 
 .navtop div a:hover {
-    color: #ffffff;
+	color: #ffffff;
 }
 
 body.loggedin {
-    background-color: #F3F4F7;
+	background-color: #F3F4F7;
 }
 
 .content {
-    width: 1000px;
-    margin: 0 auto;
+	width: 1000px;
+	margin: 0 auto;
 }
 
 .content h2 {
-    margin: 0;
-    padding: 25px 0;
-    font-size: 22px;
-    border-bottom: 1px solid #e0e0e3;
-    color: #4A536E;
+	margin: 0;
+	padding: 25px 0;
+	font-size: 22px;
+	border-bottom: 1px solid #e0e0e3;
+	color: #4A536E;
 }
 
 .content > p, .content > div {
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-    margin: 25px 0;
-    padding: 25px;
-    background-color: #ffffff;
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+	margin: 25px 0;
+	padding: 25px;
+	background-color: #ffffff;
 }
 
 .content > p table td, .content > div table td {
-    padding: 5px;
+	padding: 5px;
 }
 
 .content > p table td:first-child, .content > div table td:first-child {
-    font-weight: bold;
-    color: #4A536E;
-    padding-right: 15px;
+	font-weight: bold;
+	color: #4A536E;
+	padding-right: 15px;
 }
 
 .content > div p {
-    padding: 5px;
-    margin: 0 0 10px 0;
+	padding: 5px;
+	margin: 0 0 10px 0;
 }
 
 .login form input[type="submit"]:hover, .register form input[type="submit"]:hover {
-    background-color: #2868C7;
-    transition: background-color 0.2s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	background-color: #2868C7;
+	transition: background-color 0.2s;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .login h1, .register h1 {
-    text-align: center;
-    color: #3274D6;
-    font-size: 24px;
-    padding: 20px 0;
-    border-bottom: 1px solid #dee0e4;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	text-align: center;
+	color: #3274D6;
+	font-size: 24px;
+	padding: 20px 0;
+	border-bottom: 1px solid #dee0e4;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .content {
-    width: 1000px;
-    margin: 0 auto;
-    background: linear-gradient(to bottom, #ffffff, #f1f5f8);
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 1000px;
+	margin: 0 auto;
+	background: linear-gradient(to bottom, #ffffff, #f1f5f8);
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .content > p table, .content > div table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
 }
 
 .content > p table td, .content > div table td {
-    padding: 10px;
-    border-bottom: 1px solid #e0e0e3;
+	padding: 10px;
+	border-bottom: 1px solid #e0e0e3;
 }
 
 .content > p table td:first-child, .content > div table td:first-child {
-    font-weight: bold;
-    color: #4A536E;
-    padding-right: 15px;
-    background-color: #f7f9fb;
+	font-weight: bold;
+	color: #4A536E;
+	padding-right: 15px;
+	background-color: #f7f9fb;
 }
 
 .navtop div a {
-    padding: 0 20px;
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: bold;
-    position: relative;
-    transition: color 0.2s;
+	padding: 0 20px;
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: bold;
+	position: relative;
+	transition: color 0.2s;
 }
 
 .navtop div a:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: #ffffff;
-    visibility: hidden;
-    transform: scaleX(0);
-    transition: all 0.2s ease-in-out;
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 2px;
+	bottom: -5px;
+	left: 0;
+	background-color: #ffffff;
+	visibility: hidden;
+	transform: scaleX(0);
+	transition: all 0.2s ease-in-out;
 }
 
 .navtop div a:hover:before {
-    visibility: visible;
-    transform: scaleX(1);
+	visibility: visible;
+	transform: scaleX(1);
 }
 
 .track {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .track audio {
-    width: 95%;
-    background-color: #e6f3ff;
-}
-
-
-.track audio::-webkit-progress-value,
-.track audio::-moz-progress-bar,
-.track audio::-ms-fill {
-    background-color: #00aaff;
-}
-
-.track audio::-webkit-media-controls-play-button::before,
-.track audio::-webkit-media-controls-pause-button::before,
-.track audio::-moz-media-controls-play-button::before,
-.track audio::-moz-media-controls-pause-button::before {
-    color: #ffffff;
-}
-
-.track audio::-webkit-media-controls-time-remaining-display,
-.track audio::-moz-media-controls-time-remaining-display {
-    color: #00aaff;
+	width: 95%;
+	background-color: #e6f3ff;
 }
 
 .favorite-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #518ac7;
-    transition: color 0.3s ease-in-out;
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #518ac7;
+	transition: color 0.3s ease-in-out;
 }
-  
+
 .favorite-btn:hover {
-    color: #2381e7;
+	color: #2381e7;
 }
-  
+
 .favorite-btn.active {
-    color: #2381e7;
+	color: #2381e7;
 }
-  
+
 .favorite-btn i {
-    font-size: 1.2rem;
+	font-size: 1.2rem;
 }
 
 .message {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
 }
 
 .message.show {
-    opacity: 1;
+	opacity: 1;
 }
+
 .favorite-tracks {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 .track-item {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .track-info {
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 .track-title, .track-artist {
-    color: #333;
+	color: #333;
 }
 
 .track-title {
-    font-weight: bold;
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 5px;
+	font-weight: bold;
+	font-size: 18px;
+	color: #333;
+	margin-bottom: 5px;
 }
 
 .track-player {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 .favorite-header {
-    margin-left: 20px;
-    font-size: 24px;
-    color: #3274D6;
+	margin-left: 20px;
+	font-size: 24px;
+	color: #3274D6;
 }
+
 .tracks-header {
-    margin-left: 20px; 
-    font-size: 24px; 
-    color: #3274D6;
+	margin-left: 20px;
+	font-size: 24px;
+	color: #3274D6;
 }
 
 .track-info {
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 .track-info strong {
-    color: #333;
+	color: #333;
 }
 
 .track-info span {
-    color: #333;
+	color: #333;
 }
 
 .favorite-btn-container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .favorite-btn {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
 .track-actions {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+#track-search-container {
+	flex: 1;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+#player-container {
+	position: sticky;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #f5f5f5;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#player-controls {
+	display: flex;
+	align-items: center;
+}
+
+#player-controls button,
+#volume-slider {
+	margin: 0 5px;
+}
+/* Основной контейнер плеера */
+.player {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #f1f1f1;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+  
+  /* Кнопки управления */
+.player-controls button {
+	background-color: transparent;
+	color: #333;
+	border: none;
+	font-size: 24px;
+	cursor: pointer;
+	transition: color 0.2s ease;
+}
+
+.player-controls button:hover {
+	color: rgb(30, 102, 197);
+}
+  
+  /* Имя трека и артиста */
+.track-info {
+	text-align: center;
+	margin: 0 20px;
+}
+
+.track-info .track-name {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.track-info .artist-name {
+	font-size: 16px;
+}
+  
+  /* Ползунок громкости */
+.volume-slider {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	height: 4px;
+	background-color: #ddd;
+	border-radius: 2px;
+	outline: none;
+	margin-top: 10px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 10px;
+	height: 10px;
+	background-color: hsl(211, 100%, 50%);
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+	width: 10px;
+	height: 10px;
+	background-color: hsl(211, 100%, 50%);
+	border-radius: 50%;
+	cursor: pointer;
+}
+  
+audio {
+	display: none;
+}
+
+.player-controls button {
+	margin: 0 15px;
+ /* Увеличиваем отступ между кнопками */
+	padding: 35px;
+ /* Увеличиваем размер кнопок */
+	font-size: 24px;
+ /* Увеличиваем размер иконок */;
 }

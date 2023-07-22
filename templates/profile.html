@@ -1,22 +1,19 @@
-{% extends 'layout.html' %}
-
-{% block content %}
+{% extends 'layout.html' %} {% block content %}
 <h2> Ваш профиль</h2>
 <div>
-    <p> Данные аккаунта:</p>
-    <table>
-        <tr>
-            <td>Имя пользователя:</td>
-            <td>{{ account['username'] }}</td>
-        </tr>
-        <tr>
-            <td>Пароль:</td>
-            <td>******</td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td>{{ account['email'] }}</td>
-        </tr>
-    </table>
-</div>
-{% endblock %}
+	<p> Данные аккаунта:</p>
+	<table>
+		<tr>
+			<td>Имя пользователя:</td>
+			<td>{{ account['username'] }}</td>
+		</tr>
+		<tr>
+			<td>Пароль:</td>
+			<td>******</td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+			<td>{{ account['email'] }}</td>
+		</tr>
+	</table>
+</div> {% endblock %}

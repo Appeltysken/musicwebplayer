@@ -1,30 +1,23 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Авторизация</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-	</head>
-	<body>
-		<div class="login">
-			<h1>Авторизация</h1>
-			<div class="links">
-				<a href="{{ url_for('login') }}" class="active">Вход</a>
-				<a href="{{ url_for('register') }}">Зарегистрироваться</a>
-			</div>
-			<form action="{{ url_for('login') }}" method="post">
-				<label for="username">
-					<i class="fas fa-user"></i>
-				</label>
-				<input type="text" name="username" placeholder="Имя пользователя" id="username" required>
-				<label for="password">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="password" name="password" placeholder="Пароль" id="password" required>
-				<div class="msg">{{ msg }}</div>
-				<input type="submit" value="Login">
-			</form>
-		</div>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<title>Авторизация</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"> </head>
+
+<body>
+	<div class="login">
+		<h1>Авторизация</h1>
+		<div class="links"> <a href="{{ url_for('login') }}" class="active">Вход</a> <a href="{{ url_for('register') }}">Зарегистрироваться</a> </div>
+		<form action="{{ url_for('login') }}" method="post">
+			<label for="username"> <i class="fas fa-user"></i> </label>
+			<input type="text" name="username" placeholder="Имя пользователя" id="username" required>
+			<label for="password"> <i class="fas fa-lock"></i> </label>
+			<input type="password" name="password" placeholder="Пароль" id="password" required>
+			<div class="msg">{{ msg }}</div>
+			<input type="submit" value="Login"> </form>
+	</div> {% if not vk %} <a href="https://oauth.vk.com/authorize?client_id={{VKID}}&redirect_uri={{REDIRECTURI}}&display=mobile">Авторизоваться через VK</a> {% else %} <img src="{{photo}}" width="70"><a>Вы вошли как {{name}}! <a href="/logout">Выйти с аккаунта</a></a> {% endif %} </body>
+
 </html>
