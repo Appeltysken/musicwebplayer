@@ -179,23 +179,6 @@ body.loggedin {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.login h1, .register h1 {
-	text-align: center;
-	color: #3274D6;
-	font-size: 24px;
-	padding: 20px 0;
-	border-bottom: 1px solid #dee0e4;
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.content {
-	width: 1000px;
-	margin: 0 auto;
-	background: linear-gradient(to bottom, #ffffff, #f1f5f8);
-	border-radius: 5px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .content > p table, .content > div table {
 	width: 100%;
 	border-collapse: collapse;
@@ -214,103 +197,14 @@ body.loggedin {
 	background-color: #f7f9fb;
 }
 
-.navtop div a {
-	padding: 0 20px;
-	text-decoration: none;
-	color: #ffffff;
-	font-weight: bold;
-	position: relative;
-	transition: color 0.2s;
-}
-
-.navtop div a:before {
-	content: "";
-	position: absolute;
-	width: 100%;
-	height: 2px;
-	bottom: -5px;
-	left: 0;
-	background-color: #ffffff;
-	visibility: hidden;
-	transform: scaleX(0);
-	transition: all 0.2s ease-in-out;
-}
-
 .navtop div a:hover:before {
 	visibility: visible;
 	transform: scaleX(1);
 }
 
-.track {
-	margin-bottom: 20px;
-}
-
 .track audio {
 	width: 95%;
 	background-color: #e6f3ff;
-}
-
-.favorite-btn {
-	background: none;
-	border: none;
-	cursor: pointer;
-	color: #518ac7;
-	transition: color 0.3s ease-in-out;
-}
-
-.favorite-btn:hover {
-	color: #2381e7;
-}
-
-.favorite-btn.active {
-	color: #2381e7;
-}
-
-.favorite-btn i {
-	font-size: 1.2rem;
-}
-
-.message {
-	opacity: 0;
-	transition: opacity 0.5s ease-in-out;
-}
-
-.message.show {
-	opacity: 1;
-}
-
-.favorite-tracks {
-	list-style: none;
-	padding: 0;
-}
-
-.track-item {
-	margin-bottom: 20px;
-}
-
-.track-info {
-	margin-left: 20px;
-}
-
-.track-title, .track-artist {
-	color: #333;
-}
-
-.track-title {
-	font-weight: bold;
-	font-size: 18px;
-	color: #333;
-	margin-bottom: 5px;
-}
-
-.track-player {
-	margin-top: 10px;
-}
-
-.favorite-header {
-	margin-left: 20px;
-	font-size: 24px;
-	color: #3274D6;
 }
 
 .tracks-header {
@@ -319,57 +213,11 @@ body.loggedin {
 	color: #3274D6;
 }
 
-.track-info {
-	margin-left: 20px;
-}
-
-.track-info strong {
-	color: #333;
-}
-
-.track-info span {
-	color: #333;
-}
-
-.favorite-btn-container {
-	display: flex;
-	align-items: center;
-}
-
-.favorite-btn {
-	margin-left: 10px;
-}
-
-.track-actions {
-	display: flex;
-	align-items: center;
-}
-
-body {
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
-
 #track-search-container {
 	flex: 1;
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
-}
-
-#player-container {
-	position: sticky;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	background-color: #f5f5f5;
-	padding: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 }
 
 #player-controls {
@@ -381,7 +229,7 @@ body {
 #volume-slider {
 	margin: 0 5px;
 }
-/* Основной контейнер плеера */
+
 .player {
 	position: fixed;
 	bottom: 0;
@@ -395,75 +243,121 @@ body {
 	border-radius: 10px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-  
-  /* Кнопки управления */
+
 .player-controls button {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
 	background-color: transparent;
-	color: #333;
 	border: none;
-	font-size: 24px;
-	cursor: pointer;
-	transition: color 0.2s ease;
-}
-
-.player-controls button:hover {
-	color: rgb(30, 102, 197);
-}
-  
-  /* Имя трека и артиста */
-.track-info {
-	text-align: center;
-	margin: 0 20px;
-}
-
-.track-info .track-name {
-	font-size: 18px;
-	font-weight: bold;
-}
-
-.track-info .artist-name {
+	color: #333;
+	width: 40px;
+	height: 40px;
 	font-size: 16px;
-}
-  
-  /* Ползунок громкости */
-.volume-slider {
-	-webkit-appearance: none;
-	appearance: none;
+	cursor: pointer;
+	transition: background-color 0.2s, transform 0.2s;
+	border-radius: 50%;
+	line-height: 1;
+	position: relative;
+  }
+  .player-controls button::before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
-	height: 4px;
-	background-color: #ddd;
-	border-radius: 2px;
-	outline: none;
-	margin-top: 10px;
-}
-
-.volume-slider::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	appearance: none;
-	width: 10px;
-	height: 10px;
-	background-color: hsl(211, 100%, 50%);
-	border-radius: 50%;
-	cursor: pointer;
-}
-
-.volume-slider::-moz-range-thumb {
-	width: 10px;
-	height: 10px;
-	background-color: hsl(211, 100%, 50%);
-	border-radius: 50%;
-	cursor: pointer;
-}
+	height: 100%;
+	background-color: transparent;
+	z-index: 1;
+  }
   
+  .player-controls button i {
+	position: relative;
+	z-index: 2;
+  }
+
+  
+  .player-controls button:hover {
+	background-color: transparent;
+	transform: scale(1.1);
+	color: #333;
+  }
+  
+  .player-controls button:hover::before {
+	background-color: transparent;
+  }
+  
+  .player-controls button:hover i {
+	color: #333;
+  }
+
 audio {
 	display: none;
 }
 
 .player-controls button {
 	margin: 0 15px;
- /* Увеличиваем отступ между кнопками */
 	padding: 35px;
- /* Увеличиваем размер кнопок */
 	font-size: 24px;
- /* Увеличиваем размер иконок */;
 }
+
+.player-controls button {
+	background-color: #ffffff;
+	border: none;
+	color: #333;
+	padding: 10px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.2s, transform 0.2s;
+	border-radius: 50%;
+  }
+  
+  .player-controls button:hover {
+	background-color: #f1f1f1;
+	transform: scale(1.1);
+  }
+  
+  .time-control {
+	display: flex;
+	align-items: center;
+  }
+  
+  #current-time,
+  #duration {
+	margin: 0 10px;
+  }
+  
+  #time-slider {
+	flex: 1;
+	height: 5px;
+	background-color: #dcdcdc;
+	border-radius: 5px;
+	outline: none;
+  }
+  
+  #time-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 16px;
+	height: 16px;
+	background-color: #007bff;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	cursor: pointer;
+  }
+  
+  #time-slider::-moz-range-thumb {
+	width: 16px;
+	height: 16px;
+	background-color: #007bff;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	cursor: pointer;
+  }
+
+  #search-button {
+	width: 30%
+  }
+  #search-input{
+	width: 30%
+  }
