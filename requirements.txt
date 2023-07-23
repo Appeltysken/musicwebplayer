@@ -1,0 +1,8 @@
+flask
+flask-mysqldb
+MySQLdb.cursors
+re
+hashlib
+os
+python-dotenv
+requests
