@@ -1,19 +1,33 @@
 {% extends 'layout.html' %} {% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<style>
+		@media(min-width: 800px){
+			.profile{
+				width: 800px;
+		}
+	}
+	</style>
+</head>
 <h2> Ваш профиль</h2>
-<div>
+
+<div class="profile">
 	<p> Данные аккаунта:</p>
-	<table>
-		<tr>
-			<td>Имя пользователя:</td>
-			<td>{{ account['username'] }}</td>
-		</tr>
-		<tr>
-			<td>Пароль:</td>
-			<td>******</td>
-		</tr>
-		<tr>
-			<td>Email:</td>
-			<td>{{ account['email'] }}</td>
-		</tr>
-	</table>
-</div> {% endblock %}
+	<div class="table">
+		<table>
+			<tr>
+				<td>Имя пользователя:</td>
+				<td>{{ account['username'] }}</td>
+			</tr>
+			<tr>
+				<td>Пароль:</td>
+				<td>******</td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td>{{ account['email'] }}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+ {% endblock %}

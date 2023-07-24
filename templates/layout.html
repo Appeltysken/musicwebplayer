@@ -1,18 +1,52 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-	<meta charset="utf-8">
-	<title>{% block title %}{% endblock %}</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"> </head>
-
-<body class="loggedin">
-	<nav class="navtop">
-		<div>
-			<h1>SongShack</h1> <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Домашняя страница</a> <a href="{{ url_for('get_tracks') }}"><i class="fas fa-music"></i>Музыка</a> <a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>Профиль</a> <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Выйти</a> </div>
-	</nav>
-	<div class="content"> {% block content %}{% endblock %} </div>
-</body>
-
+    <style>
+        @media screen and (max-width: 1000px) {
+            body {
+                font-size: 13px;
+            }
+            .navtop div {
+                width: 100%;
+                justify-content: center;
+            }
+            .navtop a {
+                font-size: 12px;
+                flex: 0 0 auto;
+                margin: 0 10px;
+            }
+		}
+		@media(max-width: 390px) {
+            h1 {
+                font-size: 13px;
+				color: white;
+            }
+		}
+		@media(min-width: 390px) {
+            h1 {
+				color: white;
+            }
+		}
+		
+    </style>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" />
+    </head>
+    <body class="loggedin">
+        <nav class="navtop">
+			<h1>SongShack</h1>
+            <div>
+                <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Домашняя страница</a>
+                <a href="{{ url_for('get_tracks') }}"><i class="fas fa-music"></i>Музыка</a>
+                <a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>Профиль</a>
+                <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Выйти</a>
+            </div>
+        </nav>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
 </html>

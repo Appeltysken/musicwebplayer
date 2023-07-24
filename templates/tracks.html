@@ -1,5 +1,6 @@
 {% extends 'layout.html' %} {% block title %} Поиск треков {% endblock %} {% block content %}
 <h2>Поиск треков</h1>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <div id="track-search-container">
 	<input type="text" id="search-input" />
 	<button id="search-button">Поиск</button>
@@ -11,6 +12,7 @@
         <p id="track-info">Сейчас играет:</p>
         <p id="track-name">Музыка:</p>
         <p id="artist-name">Автор:</p>
+    
 	<div class="player-controls">
 		<button id="prev-button" class="player-controls"><i class="fas fa-backward"></i></button>
 		<button id="play-button" class="player-controls"><i class="fas fa-play"></i></button>
@@ -19,11 +21,10 @@
             <span id="current-time">00:00</span>
             <input type="range" id="time-slider" min="0" max="100" step="0.1" value="0" />
             <span id="duration">00:00</span>
-        </div>
+    </div>
 		<input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" /> </div>
 	<audio id="audio-player" controls style="display: none;"></audio>
 </div>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ url_for('static', filename='main.js') }}"></script> {% endblock %}

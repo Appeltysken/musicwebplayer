@@ -1,7 +1,6 @@
 * {
 	box-sizing: border-box;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-	font-size: 16px;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -16,6 +15,16 @@ body {
 	background-color: #ffffff;
 	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
 	margin: 100px auto;
+}
+
+@media(max-width: 400px) {
+	.login, .register {
+		width: auto;
+		background-color: #ffffff;
+		box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+		margin: 100px auto;
+	}
+		
 }
 
 .login h1, .register h1 {
@@ -94,15 +103,23 @@ body {
 .navtop {
 	background-color: #3274D6;
 	height: 60px;
-	width: 100%;
+	width: auto;
 	border: 0;
+	display: flex;
+	justify-content: center;
 }
 
 .navtop div {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 	margin: 0 auto;
 	width: 1000px;
 	height: 100%;
+}
+.navtop a {
+	flex: 0 0 auto;
+	
 }
 
 .navtop div h1, .navtop div a {
@@ -139,7 +156,7 @@ body.loggedin {
 }
 
 .content {
-	width: 1000px;
+	width: auto;
 	margin: 0 auto;
 }
 
@@ -223,6 +240,8 @@ body.loggedin {
 #player-controls {
 	display: flex;
 	align-items: center;
+	width: auto;
+	height: auto;
 }
 
 #player-controls button,
@@ -260,7 +279,8 @@ body.loggedin {
 	line-height: 1;
 	position: relative;
   }
-  .player-controls button::before {
+
+.player-controls button::before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -279,10 +299,9 @@ body.loggedin {
 
   
   .player-controls button:hover {
-	background-color: transparent;
-	transform: scale(1.1);
-	color: #333;
-  }
+    background-color: transparent;
+    color: #333;
+}
   
   .player-controls button:hover::before {
 	background-color: transparent;
@@ -295,28 +314,6 @@ body.loggedin {
 audio {
 	display: none;
 }
-
-.player-controls button {
-	margin: 0 15px;
-	padding: 35px;
-	font-size: 24px;
-}
-
-.player-controls button {
-	background-color: #ffffff;
-	border: none;
-	color: #333;
-	padding: 10px;
-	font-size: 16px;
-	cursor: pointer;
-	transition: background-color 0.2s, transform 0.2s;
-	border-radius: 50%;
-  }
-  
-  .player-controls button:hover {
-	background-color: #f1f1f1;
-	transform: scale(1.1);
-  }
   
   .time-control {
 	display: flex;
@@ -361,3 +358,13 @@ audio {
   #search-input{
 	width: 30%
   }
+  
+  .track-info{
+	position: center;
+  }
+
+  @media (max-width: 390px) {
+	.login layout {
+		font-size: 2px;
+	}
+}
