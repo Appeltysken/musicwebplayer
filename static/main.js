@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const durationElement = document.getElementById("duration");
 	const timeSlider = document.getElementById("time-slider");
 
+
 	let currentTrackIndex = 0;
 	let tracks = [];
 
@@ -200,8 +201,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	 * Функция добавляет обработчик события "input" на ползунок громкости аудио-плеера.
 	 * При изменении значения ползунка, функция устанавливает громкость аудио-плеера в соответствии с новым значением ползунка.
 	 */
+	volumeSlider.value = volumeSlider.max;
 	volumeSlider.addEventListener("input", () => {
-		audioPlayer.volume = volumeSlider.value;
+	  audioPlayer.volume = volumeSlider.value;
+	});
+	window.addEventListener("beforeunload", () => {
+	  volumeSlider.value = volumeSlider.max;
 	});
 
 	/**
