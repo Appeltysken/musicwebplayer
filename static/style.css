@@ -363,8 +363,12 @@ audio {
 	position: center;
   }
 
-  @media (max-width: 390px) {
-	.login layout {
-		font-size: 2px;
+@media (max-height: 540px) {
+	#player-controls {
+		padding-top: 0px;
+		height: 220px;
+	}
+	#track-search-container{
+		padding-bottom: 0px;
 	}
 }

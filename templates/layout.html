@@ -18,15 +18,16 @@
 		@media(max-width: 390px) {
             h1 {
                 font-size: 13px;
+                padding-left: 1px;
 				color: white;
             }
 		}
 		@media(min-width: 390px) {
             h1 {
 				color: white;
+                padding-left: 10px;
             }
 		}
-		
     </style>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -38,7 +39,7 @@
     <body class="loggedin">
         <nav class="navtop">
 			<h1>SongShack</h1>
-            <div>
+            <div class="links-block">
                 <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Домашняя страница</a>
                 <a href="{{ url_for('get_tracks') }}"><i class="fas fa-music"></i>Музыка</a>
                 <a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>Профиль</a>
