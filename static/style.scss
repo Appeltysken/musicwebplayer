@@ -1,6 +1,8 @@
+$super-small: 336px;
 $small: 390px;
 $small-medium: 590px;
 $medium: 1000px;
+
 $primary-color: #3274D6;
 $secondary-color: #ADB2BA;
 
@@ -362,6 +364,25 @@ audio {
 	position: center;
 }
 
+ul {
+	list-style-type: none;
+	padding-left:0;
+}
+li {
+	word-wrap: break-word;
+	margin-bottom:0;
+	marker:none;
+}
+
+.track-divider {
+	border-top: 1px solid #ccc;
+	margin: 20px 0;
+}
+.tracks {
+	margin: 0;
+	padding: 0;
+}
+
 @media (max-height: 540px) {
 	#player-controls {
 		padding-top: 0px;
@@ -397,7 +418,7 @@ audio {
 	}
 }
 
-@media screen and (max-width: $medium) {
+@media (min-width: 336px) and (max-width: $medium) {
 	body {
 		font-size: 13px;
 	}
@@ -407,6 +428,14 @@ audio {
 	}
 	.navtop a {
 		font-size: 12px;
+		flex: 0 0 auto;
+		margin: 0 10px;
+	}
+}
+
+@media screen and (max-width: 336px) {
+	.navtop a {
+		font-size: 11px;
 		flex: 0 0 auto;
 		margin: 0 10px;
 	}
@@ -447,6 +476,15 @@ audio {
 	}
 }
 @media (max-height: $small-medium){
+	.register{
+		margin-top:0;
+		width: 360px;
+		height: 370px;
+		margin-bottom:0;
+	}
+}
+
+@media (max-width: $small-medium){
 	.register{
 		margin-top:0;
 		width: 360px;
