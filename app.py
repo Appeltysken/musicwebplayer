@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, jsonify, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
@@ -41,6 +41,7 @@ class Database:
             user=os.getenv("MYSQL_USER"),
             password=os.getenv("MYSQL_PASSWORD"),
         )
+
         db_cursor = db_connection.cursor()
         db_cursor.execute("CREATE DATABASE IF NOT EXISTS songshackdb")
         db_cursor.execute(
@@ -48,13 +49,15 @@ class Database:
             "id INT AUTO_INCREMENT PRIMARY KEY,"
             "username VARCHAR(255) NOT NULL,"
             "password VARCHAR(255) NOT NULL,"
-            "email VARCHAR(255) NOT NULL"
+            "email VARCHAR(255) NOT NULL,"
+            "track_n_a VARCHAR(255) NOT NULL"
             ")"
         )
         db_cursor.execute(
             "CREATE TABLE IF NOT EXISTS songshackdb.users ("
             "user_id INT PRIMARY KEY,"
-            "username VARCHAR(255) NOT NULL"
+            "username VARCHAR(255) NOT NULL,"
+            "track_n_a VARCHAR(255) NOT NULL"
             ")"
         )
         db_connection.close()
@@ -88,10 +91,12 @@ def login():
                 session["loggedin"] = True
                 session["id"] = account["id"]
                 session["username"] = account["username"]
-                user = account
                 return redirect(url_for("home"))
             else:
                 msg = "Неверный логин/пароль."
+                 
+        mysql.connection.close()
+
     return render_template("index.html", msg=msg)
 
 
@@ -99,10 +104,18 @@ def login():
 def logout():
     """
     Функция для выхода пользователя из системы.
-    Она очищает сессию и перенаправляет пользователя на страницу авторизации.
+    Она очищает сессию полностью и перенаправляет пользователя на страницу авторизации.
     """
     session.clear()
     return redirect(url_for("login"))
+
+@app.route("/clear_session", methods=["POST"])
+def clear_session():
+    """
+    Функция для принудительной очистки данных сессии при закрытии вкладки.
+    """
+    session.clear()
+    return jsonify({"success": True})
 
 
 @app.route("/musicwebplayer/register", methods=["GET", "POST"])
@@ -137,6 +150,9 @@ def register():
                     (username, hashed_password, email),
                 )
                 mysql.connection.commit()
+
+                mysql.connection.close()
+
                 msg = "Вы успешно зарегистрировались!"
         else:
             msg = "Вы пропустили поле."
@@ -192,16 +208,10 @@ def profile():
 
             if account:
                 return render_template("profile.html", account=account)
+        
+        mysql.connection.close()
+
     return redirect(url_for("login"))
-
-
-@app.before_request
-def make_session_permanent():
-    """
-    Функция, которая устанавливает сессию как постоянную при каждом запросе.
-    """
-    session.permanent = True
-
 
 def template(tmpl_name, **kwargs):
     """
@@ -284,10 +294,146 @@ def login_vk():
                 username,
             ),
         )
-        mysql.connection.commit()
+    mysql.connection.commit()
+        
     session["username"] = username
     return redirect(url_for("home"))
 
+
+
+@app.route("/send_track_info", methods=["POST"])
+def send_track_info():
+    """
+    Функция для обработки POST запроса для отправки информации о треке: название трека и исполнителя.
+    Информация отправляется в БД MySQL и попадает в колонку "track_n_a".
+    """
+    if "loggedin" in session:
+        try:
+            track_info = request.get_json()
+            track_name = track_info["trackName"]
+            artist_name = track_info["artistName"]
+            track_n_a = track_name + "&" + artist_name
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+            if "user_id" in session:  # Если пользователь авторизован через VK
+                user_id = session['user_id']
+                print(user_id)
+                    
+                cursor.execute('SELECT track_n_a FROM users WHERE user_id = %s', (user_id,))
+                user = cursor.fetchone()
+
+                if user:
+                    favorite_tags = user['track_n_a']
+                    if favorite_tags:
+                        favorite_tags = favorite_tags.split(',')
+                    else:
+                        favorite_tags = []
+
+                    if track_n_a not in favorite_tags:
+                        favorite_tags.append(track_n_a)
+
+                    track_n_a_str = ','.join(favorite_tags)
+
+                    cursor.execute('UPDATE users SET track_n_a = %s WHERE user_id = %s', (track_n_a_str, user_id,))
+                    mysql.connection.commit()
+
+                    session['track_n_a'] = favorite_tags
+
+                    response = {'success': True}
+                    return jsonify(response)
+                else:
+                    response = {'success': False, 'message': 'Пользователь не найден'}
+                    return jsonify(response)
+
+
+            else:  # Если пользователь авторизован стандартным способом
+                id = session['id']
+
+                cursor.execute('SELECT track_n_a FROM accounts WHERE id = %s', (id,))
+                account = cursor.fetchone()
+
+                if account:
+                    favorite_tags = account['track_n_a']
+                    if favorite_tags:
+                        favorite_tags = favorite_tags.split(',')
+                    else:
+                        favorite_tags = []
+
+                    if track_n_a not in favorite_tags:
+                        favorite_tags.append(track_n_a)
+
+                    track_n_a_str = ','.join(favorite_tags)
+
+                    cursor.execute('UPDATE accounts SET track_n_a = %s WHERE id = %s', (track_n_a_str, id,))
+                    mysql.connection.commit()
+
+                    session['track_n_a'] = favorite_tags
+
+                    response = {'success': True}
+                    return jsonify(response)
+                else:
+                    response = {'success': False, 'message': 'Пользователь не найден'}
+                    return jsonify(response)
+            
+        except Exception as e:
+            response = {'success': False, 'message': 'Ошибка при обработке запроса'}
+
+            return jsonify(response)
+        
+    else:
+        response = {'success': False, 'message': 'Пользователь не авторизован'}
+        return jsonify(response)
+
+@app.route("/musicwebplayer/favorite")
+def favorite():
+    if "loggedin" in session:
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        if "user_id" in session:  # Если пользователь авторизован через VK
+            try:
+
+                user_id = session['user_id']
+                cursor.execute('SELECT track_n_a FROM users WHERE user_id = %s', (user_id,))
+                user = cursor.fetchone()
+
+                if user:
+                    favorite_tags = user['track_n_a']
+                    if favorite_tags:
+                        favorite_tags = favorite_tags.split(',')
+                    else:
+                        favorite_tags = []
+
+                    return render_template("favorite.html", favorite_tags=favorite_tags)
+
+                else:
+                    return render_template("favorite.html", favorite_tags=[])
+
+            except Exception:
+                return "Ошибка при обработке запроса"
+
+        elif "loggedin" in session:  # Если пользователь авторизован стандартным способом
+            try:
+
+                id = session['id']
+                cursor.execute('SELECT track_n_a FROM accounts WHERE id = %s', (id,))
+                account = cursor.fetchone()
+
+                if account:
+                    favorite_tags = account['track_n_a']
+                    if favorite_tags:
+                        favorite_tags = favorite_tags.split(',')
+                    else:
+                        favorite_tags = []
+
+                    return render_template("favorite.html", favorite_tags=favorite_tags)
+
+                else:
+                    return render_template("favorite.html", favorite_tags=[])
+
+            except Exception:
+                return "Ошибка при обработке запроса"
+            
+        else:
+            return "Пользователь не авторизован"
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %} Избранные композиции {% endblock %}
+
+{% block content %}
+<head>
+    <script src="/static/clear_script.js"></script>
+</head>
+
+<h2>Избранные композиции</h2>
+{% if favorite_tags %}
+<div class="tracks">
+    {% for tag in favorite_tags %}
+    <li class="track">
+        <strong>Название:</strong> {{ tag.split('&')[0] }}<br>
+        <strong>Исполнитель:</strong> {{ tag.split('&')[1] }}
+    </li>
+    {% if not loop.last %}
+    <div class="track-divider"></div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% else %}
+<p>У вас нет избранных композиций.</p>
+{% endif %}
+{% endblock %}

@@ -88,6 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				displayTrack(tracks[currentTrackIndex]);
 				updateAudioSource(tracks[currentTrackIndex].audio);
 				updateTrackInfo(tracks[currentTrackIndex]);
+
+				addInfoButton(tracks[currentTrackIndex]);
 			}
 		} catch (error) {
 			console.error("При поиске трека произошла ошибка:", error);
@@ -276,4 +278,35 @@ document.addEventListener("DOMContentLoaded", () => {
 	audioPlayer.addEventListener("pause", () => {
 		cancelAnimationFrame(animationFrameId);
 	});
+
+	function addInfoButton(track) {
+		const infoButton = document.createElement("button");
+		infoButton.classList.add("info-button");
+		infoButton.textContent = 'Добавить в "Избранное"';
+		infoButton.addEventListener("click", () => {
+			sendTrackInfoToServer(track);
+		});
+		searchResults.appendChild(infoButton);
+	}
+
+	function sendTrackInfoToServer(track) {
+		const trackInfo = {
+			trackName: track.name,
+			artistName: track.artist_name
+		};
+	
+		// Отправляем информацию о треке на сервер с помощью AJAX-запроса
+		$.ajax({
+			type: "POST",
+			url: "/send_track_info",
+			data: JSON.stringify(trackInfo),
+			contentType: "application/json",
+			success: function(response) {
+				console.log("Информация о треке успешно отправлена на сервер.");
+			},
+			error: function(error) {
+				console.error("Ошибка при отправке информации о треке:", error);
+			}
+		});
+	}
 });
