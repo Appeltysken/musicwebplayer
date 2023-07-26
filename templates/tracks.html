@@ -1,4 +1,8 @@
 {% extends 'layout.html' %} {% block title %} Поиск треков {% endblock %} {% block content %}
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <h2>Поиск треков</h1>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <div id="track-search-container">
@@ -25,6 +29,5 @@
 		<input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" /> </div>
 	<audio id="audio-player" controls style="display: none;"></audio>
 </div>
-<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ url_for('static', filename='main.js') }}"></script> {% endblock %}
