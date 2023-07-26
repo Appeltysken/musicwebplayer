@@ -6,6 +6,7 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" />
+        <script src="/static/clear_script.js"></script>
     </head>
     <body class="loggedin">
         <nav class="navtop">
@@ -13,6 +14,7 @@
             <div class="links-block">
                 <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Домашняя страница</a>
                 <a href="{{ url_for('get_tracks') }}"><i class="fas fa-music"></i>Музыка</a>
+                <a href="{{ url_for('favorite') }}"><i class="fas fa-star"></i>Избранное</a>
                 <a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>Профиль</a>
                 <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Выйти</a>
             </div>
