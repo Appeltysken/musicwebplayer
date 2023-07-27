@@ -2,10 +2,10 @@ from flask import Flask, jsonify, render_template, request, redirect, url_for, s
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
-import hashlib
 import os
 from dotenv import load_dotenv
 import requests
+import bcrypt
 
 load_dotenv()
 
@@ -57,7 +57,7 @@ class Database:
             "CREATE TABLE IF NOT EXISTS songshackdb.users ("
             "user_id INT PRIMARY KEY,"
             "username VARCHAR(255) NOT NULL,"
-            "track_n_a VARCHAR(255) NOT NULL"
+            "track_n_a VARCHAR(255) NULL"
             ")"
         )
         db_connection.close()
@@ -80,14 +80,15 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         if username and password:
-            hash = hashlib.sha1((password + app.secret_key).encode()).hexdigest()
+            # Hash the password using bcrypt
+
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
             cursor.execute(
-                "SELECT * FROM accounts WHERE username = %s AND password = %s",
-                (username, hash),
+                "SELECT * FROM accounts WHERE username = %s", (username,)
             )
             account = cursor.fetchone()
-            if account:
+
+            if account and bcrypt.checkpw(password.encode(), account["password"].encode()):
                 session["loggedin"] = True
                 session["id"] = account["id"]
                 session["username"] = account["username"]
@@ -142,9 +143,8 @@ def register():
             elif not re.match(r"[A-Za-z0-9]+", username):
                 msg = "Имя должно содержать только буквы и цифры."
             else:
-                hashed_password = hashlib.sha1(
-                    (password + app.secret_key).encode()
-                ).hexdigest()
+
+                hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
                 cursor.execute(
                     "INSERT INTO accounts (username, password, email) VALUES (%s, %s, %s)",
                     (username, hashed_password, email),
