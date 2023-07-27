@@ -50,7 +50,7 @@ class Database:
             "username VARCHAR(255) NOT NULL,"
             "password VARCHAR(255) NOT NULL,"
             "email VARCHAR(255) NOT NULL,"
-            "track_n_a VARCHAR(255) NOT NULL"
+            "track_n_a VARCHAR(255) NULL"
             ")"
         )
         db_cursor.execute(
@@ -80,7 +80,6 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         if username and password:
-            # Hash the password using bcrypt
 
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
             cursor.execute(
@@ -146,8 +145,8 @@ def register():
 
                 hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
                 cursor.execute(
-                    "INSERT INTO accounts (username, password, email) VALUES (%s, %s, %s)",
-                    (username, hashed_password, email),
+                    "INSERT INTO accounts (username, password, email, track_n_a) VALUES (%s, %s, %s, %s)",
+                    (username, hashed_password, email, None),
                 )
                 mysql.connection.commit()
 
@@ -157,6 +156,7 @@ def register():
         else:
             msg = "Вы пропустили поле."
     return render_template("register.html", msg=msg)
+
 
 
 @app.route("/musicwebplayer/home")
@@ -288,10 +288,11 @@ def login_vk():
         return redirect(url_for("home"))
     else:
         cursor.execute(
-            "INSERT INTO users (user_id, username) VALUES (%s, %s)",
+            "INSERT INTO users (user_id, username, track_n_a) VALUES (%s, %s, %s)",
             (
                 user_id,
                 username,
+                None
             ),
         )
     mysql.connection.commit()
