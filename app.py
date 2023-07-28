@@ -13,9 +13,9 @@ app = Flask(__name__)
 
 app.secret_key = os.getenv("APP_SECRET_KEY")  # Секретный ключ (любой)
 app.config["MYSQL_HOST"] = os.getenv("MYSQL_HOST")  # local host
-app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")  # root
+app.config["MYSQL_USER"] = os.getenv("MYSQL_USER") # root
 app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
-app.config["MYSQL_DB"] = os.getenv("MYSQL_DB")  # Название базы данных MySQL
+app.config["MYSQL_DATABASE"] = os.getenv("MYSQL_DATABASE")  # Название базы данных MySQL
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 VKID = os.getenv("VKID")  # ID приложения
 
@@ -24,9 +24,9 @@ VKSECRET = os.getenv("VK_SECRET")
 
 app.jinja_env.globals.update(VKID=VKID)  # ID приложения
 app.jinja_env.globals.update(REDIRECTURI=REDIRECTURI)  # Редирект
+name_of_db=app.config["MYSQL_DATABASE"]
 
 mysql = MySQL(app)
-
 
 class Database:
     def create_database():
@@ -37,15 +37,15 @@ class Database:
         users - хранит информацию о пользователях, которые авторизовались через VK.
         """
         db_connection = MySQLdb.connect(
-            host=os.getenv("MYSQL_HOST"),
-            user=os.getenv("MYSQL_USER"),
-            password=os.getenv("MYSQL_PASSWORD"),
+            host=app.config["MYSQL_HOST"],
+            user=app.config["MYSQL_USER"],
+            password=app.config["MYSQL_PASSWORD"],
         )
 
         db_cursor = db_connection.cursor()
-        db_cursor.execute("CREATE DATABASE IF NOT EXISTS songshackdb")
+        db_cursor.execute(f"CREATE DATABASE IF NOT EXISTS {name_of_db}")
         db_cursor.execute(
-            "CREATE TABLE IF NOT EXISTS songshackdb.accounts ("
+            f"CREATE TABLE IF NOT EXISTS {name_of_db}.accounts ("
             "id INT AUTO_INCREMENT PRIMARY KEY,"
             "username VARCHAR(255) NOT NULL,"
             "password VARCHAR(255) NOT NULL,"
@@ -54,7 +54,7 @@ class Database:
             ")"
         )
         db_cursor.execute(
-            "CREATE TABLE IF NOT EXISTS songshackdb.users ("
+            f"CREATE TABLE IF NOT EXISTS {name_of_db}.users ("
             "user_id INT PRIMARY KEY,"
             "username VARCHAR(255) NOT NULL,"
             "track_n_a VARCHAR(255) NULL"
@@ -82,6 +82,7 @@ def login():
         if username and password:
 
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute(f"USE {name_of_db}")
             cursor.execute(
                 "SELECT * FROM accounts WHERE username = %s", (username,)
             )
@@ -133,6 +134,7 @@ def register():
         email = request.form.get("email")
         if username and password and email:
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute(f"USE {name_of_db}")
             cursor.execute("SELECT * FROM accounts WHERE username = %s", (username,))
             account = cursor.fetchone()
             if account:
@@ -193,6 +195,7 @@ def profile():
     """
     if "loggedin" in session:
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(f"USE {name_of_db}")
 
         if "user_id" in session:
             cursor.execute(
@@ -257,6 +260,7 @@ def login_vk():
     session["last_name"] = get_info["last_name"]
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute(f"USE {name_of_db}")
 
     username = session["first_name"] + " " + session["last_name"]
     user_id = session["user_id"]
@@ -315,6 +319,7 @@ def send_track_info():
             artist_name = track_info["artistName"]
             track_n_a = track_name + "&" + artist_name
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute(f"USE {name_of_db}")
 
             if "user_id" in session:  # Если пользователь авторизован через VK
                 user_id = session['user_id']
@@ -389,6 +394,7 @@ def send_track_info():
 def favorite():
     if "loggedin" in session:
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(f"USE {name_of_db}")
         if "user_id" in session:  # Если пользователь авторизован через VK
             try:
 
@@ -437,4 +443,4 @@ def favorite():
             return "Пользователь не авторизован"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000) # Или можно выбрать какой-то определенный.
