@@ -1,32 +1,17 @@
-version: "3.8"
+version: '3'
 
 services:
-  flask:
-    build: ./app
-    container_name: flask
+  app:
+    build: .
+    network_mode: "bridge"
+    ports:
+      - "127.0.0.1:5000:5000"
     env_file:
       - .env
     environment:
-      - PYTHONUNBUFFERED=True
-      - APP_SECRET_KEY=${APP_SECRET_KEY}
-      - VKID=${VKID}
-      - VK_SECRET=${VK_SECRET}
-    restart: on-failure
-    volumes:
-      - ./app:/app
-    ports:
-      - 5000:5000
-    command: python app.py
-  mysql_db:
-    image: mysql:latest
-    ports:
-      - 3306:3306
-    env_file:
-      - .env
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - MYSQL_HOST=${MYSQL_HOST}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    volumes:
-      - ./mysql:/var/lib/mysql
+      - MYSQL_DATABASE=${MYSQL_DATABASE}

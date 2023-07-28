@@ -1,8 +1,7 @@
 FROM python:latest
 
 WORKDIR /app
-COPY requirements.txt /app
-RUN pip3 install --upgrade pip -r requirements.txt
 COPY . /app
+RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
-
+CMD ["python", "app.py"]
